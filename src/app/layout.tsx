@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Roboto, Barlow_Condensed } from "next/font/google";
 import "./globals.css";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -31,7 +29,7 @@ export default function RootLayout({
       className={`${roboto.variable} ${barlow.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Navbar />
+        {/* <Navbar /> */}
         <main>{children}</main>
         {/* <Footer /> */}
       </body>
