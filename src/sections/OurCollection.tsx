@@ -74,6 +74,7 @@ const OurCollection = () => {
         {products.map((item) => (
           <ProductCard
             key={item.id}
+            id={item.id}
             image={item.image}
             title={item.title}
             price={item.price}
