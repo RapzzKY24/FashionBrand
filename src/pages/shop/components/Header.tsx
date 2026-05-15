@@ -1,11 +1,14 @@
+import Link from "next/link";
 import React from "react";
 
 const Header = () => {
   return (
     <div className="flex flex-col justify-center gap-y-2">
-      <h1 className="text-[16px] text-gray-400 font-roboto font-light uppercase">
-        / Our Product
-      </h1>
+      <div className="flex items-center gap-2 font-roboto text-sm">
+        <Link href="/home">Home</Link>
+        <span>/</span>
+        <span>Shop</span>
+      </div>
       <h1 className="text-6xl font-barlow font-extrabold text-black uppercase tracking-[0.08rem]">
         SHOP
       </h1>
