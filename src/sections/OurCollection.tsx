@@ -6,6 +6,7 @@ import Hoddie2 from "../../public/hoddieCollection/hoddie2.png";
 import Hoddie3 from "../../public/hoddieCollection/hoddie3.png";
 import Hoddie4 from "../../public/hoddieCollection/hoddie4.png";
 import { ProductCard } from "../components/ProductCard";
+import Link from "next/link";
 
 const categories = [
   "Hoodie",
@@ -60,15 +61,26 @@ const OurCollection = () => {
           curated collections are designed to suit every occasion and style.
         </p>
       </div>
-      <div className="flex items-center gap-4 flex-wrap">
-        {categories.map((category) => (
-          <CategoryButton
-            key={category}
-            title={category}
-            active={activeCategory === category}
-            onClick={() => setActiveCategory(category)}
-          />
-        ))}
+      <div className="flex items-center justify-between">
+        {/* categories */}
+        <div className="flex items-center gap-4 flex-wrap">
+          {categories.map((category) => (
+            <CategoryButton
+              key={category}
+              title={category}
+              active={activeCategory === category}
+              onClick={() => setActiveCategory(category)}
+            />
+          ))}
+        </div>
+
+        {/* collections button */}
+        <Link
+          href="/collections"
+          className="border border-black px-5 py-3 text-sm font-roboto uppercase tracking-[0.08em] hover:bg-black hover:text-white transition"
+        >
+          View Collections
+        </Link>
       </div>
       <div className="grid grid-cols-4 gap-6">
         {products.map((item) => (

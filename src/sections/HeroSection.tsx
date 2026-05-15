@@ -14,12 +14,15 @@ const HeroSection = () => {
                 Reflect <span className="px-34">Fashion</span>
               </h1>
               <div className="px-36">
-                <p className="font-roboto text-[16px] font-light">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex
-                  nisi magni quaerat et exercitationem! Deleniti excepturi quasi
-                  nisi autem molestiae ipsa corrupti exercitationem consequatur
-                  aut, quo, neque enim provident voluptatibus magni, fugiat
-                  veniam architecto non dicta cumque. Cumque, iusto debitis!
+                <p className="font-roboto text-[16px] font-light text-justify">
+                  Reflect is built around the idea of timeless streetwear —
+                  clean silhouettes, premium comfort, and everyday versatility.
+                  Every piece is designed to blend modern aesthetics with
+                  effortless wearability, allowing you to express confidence
+                  through simplicity. Inspired by contemporary culture and
+                  minimal design principles, our collections are created for
+                  individuals who value detail, identity, and understated style
+                  in every moment.
                 </p>
               </div>
               <div className="px-36 flex items-center gap-x-4 w-full">
