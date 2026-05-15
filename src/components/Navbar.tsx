@@ -1,8 +1,15 @@
 "use client";
 
-import { SearchIcon, ShoppingCartIcon, UserIcon } from "lucide-react";
+import { useState } from "react";
+import {
+  LogInIcon,
+  SearchIcon,
+  ShoppingCartIcon,
+  UserIcon,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import SearchModal from "./SearchModal";
 
 const NAV_ITEMS = [
   {
@@ -14,71 +21,98 @@ const NAV_ITEMS = [
     links: "/shop",
   },
   {
-    title: "New Arrival",
-    links: "/newarrival",
-  },
-  {
     title: "Collections",
     links: "/collections",
-  },
-  {
-    title: "About Us",
-    links: "/aboutUs",
   },
 ];
 
 const Navbar = () => {
   const pathname = usePathname();
 
+  const [openSearch, setOpenSearch] = useState(false);
+
+  const mockUser = {
+    name: "Jason Dev.",
+  };
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/60 backdrop-blur-xl border-b border-white/20">
-      <nav className="flex items-center justify-between px-16 py-8">
-        {/* nav items */}
-        <div className="flex items-center gap-14">
-          {NAV_ITEMS.map((item, i) => {
-            const isActive = pathname === item.links;
+    <>
+      <header className="fixed left-0 right-0 top-0 z-50 border-b border-white/20 bg-white/60 backdrop-blur-xl">
+        <nav className="flex items-center justify-between px-16 py-8">
+          {/* nav items */}
+          <div className="flex items-center gap-14">
+            {NAV_ITEMS.map((item, i) => {
+              const isActive = pathname === item.links;
 
-            return (
-              <Link href={item.links} key={i} className="relative group">
-                <h1
-                  className={`font-roboto text-[16px] uppercase transition-all duration-300 ${
-                    isActive ? "text-black font-semibold" : "text-gray-500"
-                  }`}
-                >
-                  {item.title}
-                </h1>
+              return (
+                <Link href={item.links} key={i} className="group relative">
+                  <h1
+                    className={`font-roboto text-[16px] uppercase transition-all duration-300 ${
+                      isActive ? "font-semibold text-black" : "text-gray-500"
+                    }`}
+                  >
+                    {item.title}
+                  </h1>
 
-                {/* underline */}
-                <span
-                  className={`absolute -bottom-2 left-0 h-[2px] bg-black transition-all duration-300 ${
-                    isActive ? "w-full" : "w-0 group-hover:w-full"
-                  }`}
+                  <span
+                    className={`absolute -bottom-2 left-0 h-[2px] bg-black transition-all duration-300 ${
+                      isActive ? "w-full" : "w-0 group-hover:w-full"
+                    }`}
+                  />
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* logo */}
+          <Link href="/home">
+            <h1 className="font-barlow text-4xl font-bold uppercase">
+              reflect
+            </h1>
+          </Link>
+
+          {/* icons */}
+          <div className="flex items-center gap-5">
+            {/* search */}
+            <button
+              onClick={() => setOpenSearch(true)}
+              className="transition hover:opacity-70"
+            >
+              <SearchIcon size={24} />
+            </button>
+
+            {/* user */}
+            {mockUser ? (
+              <Link href="/users" className="transition hover:opacity-70">
+                <UserIcon size={24} />
+              </Link>
+            ) : (
+              <Link href="/auth/login" className="transition hover:opacity-70">
+                <LogInIcon size={24} />
+              </Link>
+            )}
+
+            {/* cart */}
+            <span className="relative">
+              <div className="absolute -right-1.5 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-600">
+                <span className="text-[10px] font-bold leading-none text-white">
+                  3
+                </span>
+              </div>
+
+              <Link href={"/cart"}>
+                <ShoppingCartIcon
+                  size={24}
+                  className="cursor-pointer transition hover:opacity-70"
                 />
               </Link>
-            );
-          })}
-        </div>
+            </span>
+          </div>
+        </nav>
+      </header>
 
-        {/* logo */}
-        <h1 className="text-4xl font-barlow font-bold uppercase">reflect</h1>
-
-        {/* icons */}
-        <div className="flex items-center gap-4">
-          <SearchIcon size={26} />
-          <UserIcon size={26} />
-
-          <span className="relative">
-            <div className="bg-red-600 rounded-full w-4 h-4 absolute -top-1 -right-1.5 flex items-center justify-center">
-              <span className="text-[10px] font-bold text-white leading-none">
-                1
-              </span>
-            </div>
-
-            <ShoppingCartIcon size={26} />
-          </span>
-        </div>
-      </nav>
-    </header>
+      <SearchModal open={openSearch} onClose={() => setOpenSearch(false)} />
+    </>
   );
 };
 
