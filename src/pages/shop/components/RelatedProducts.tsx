@@ -7,6 +7,7 @@ type Product = {
   id: number;
   image: StaticImageData | string;
   title: string;
+  category: string;
   price: string;
 };
 
@@ -34,7 +35,7 @@ export default function RelatedProducts({ products }: Props) {
       </div>
 
       <div className="grid grid-cols-3 gap-8">
-        {products.map((item) => (
+        {products?.map((item) => (
           <ProductCard
             key={item.id}
             id={item.id}
