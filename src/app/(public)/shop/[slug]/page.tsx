@@ -7,7 +7,7 @@ import ProductInfo from "@/src/features/product/components/ProductInfo";
 import QuantityActions from "@/src/features/product/components/QuantityActions";
 import RelatedProducts from "@/src/features/product/components/RelatedProducts";
 import SizeSelector from "@/src/features/product/components/SizeSelector";
-import { ProductService } from "@/src/services/product";
+import { ProductService } from "@/src/features/product/services/product";
 
 export default async function ProductDetailPage({
   params,

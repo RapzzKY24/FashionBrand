@@ -1,7 +1,7 @@
 import FilterPanelProduct from "@/src/features/product/components/FilterPanelProduct";
 import Header from "@/src/features/product/components/Header";
 import { ProductCard } from "@/src/components/ProductCard";
-import { ProductService } from "@/src/services/product";
+import { ProductService } from "@/src/features/product/services/product";
 
 const ProductPages = async () => {
   const products = await ProductService.getAllProduct();
