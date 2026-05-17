@@ -3,7 +3,7 @@ import { useState } from "react";
 import { CategoryButton } from "../components/CategoryButton";
 import { ProductCard } from "../components/ProductCard";
 import Link from "next/link";
-import { Props } from "../pages/shop/components/RelatedProducts";
+import { Props } from "../features/product/components/RelatedProducts";
 
 const categories = [
   "Hoodie",

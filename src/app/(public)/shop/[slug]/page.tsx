@@ -1,12 +1,12 @@
 import { products } from "@/src/data/Product";
-import ColorSelector from "@/src/pages/shop/components/CollorSelector";
-import ProductAccordion from "@/src/pages/shop/components/ProductAccordion";
-import ProductBreadcrumb from "@/src/pages/shop/components/ProductBreadcrumb";
-import ProductGallery from "@/src/pages/shop/components/ProductGallery";
-import ProductInfo from "@/src/pages/shop/components/ProductInfo";
-import QuantityActions from "@/src/pages/shop/components/QuantityActions";
-import RelatedProducts from "@/src/pages/shop/components/RelatedProducts";
-import SizeSelector from "@/src/pages/shop/components/SizeSelector";
+import ColorSelector from "@/src/features/product/components/CollorSelector";
+import ProductAccordion from "@/src/features/product/components/ProductAccordion";
+import ProductBreadcrumb from "@/src/features/product/components/ProductBreadcrumb";
+import ProductGallery from "@/src/features/product/components/ProductGallery";
+import ProductInfo from "@/src/features/product/components/ProductInfo";
+import QuantityActions from "@/src/features/product/components/QuantityActions";
+import RelatedProducts from "@/src/features/product/components/RelatedProducts";
+import SizeSelector from "@/src/features/product/components/SizeSelector";
 import { ProductService } from "@/src/services/product";
 
 export default async function ProductDetailPage({
