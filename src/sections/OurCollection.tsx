@@ -1,12 +1,9 @@
 "use client";
 import { useState } from "react";
 import { CategoryButton } from "../components/CategoryButton";
-import Hoddie1 from "../../public/hoddieCollection/hoddie1.png";
-import Hoddie2 from "../../public/hoddieCollection/hoddie2.png";
-import Hoddie3 from "../../public/hoddieCollection/hoddie3.png";
-import Hoddie4 from "../../public/hoddieCollection/hoddie4.png";
 import { ProductCard } from "../components/ProductCard";
 import Link from "next/link";
+import { Props } from "../pages/shop/components/RelatedProducts";
 
 const categories = [
   "Hoodie",
@@ -16,38 +13,7 @@ const categories = [
   "Accessories",
 ];
 
-export const products = [
-  {
-    id: 1,
-    image: Hoddie1,
-    title: "Men BLVCK Grey Hoodie",
-    category: "Hoddie",
-    price: "$180",
-  },
-  {
-    id: 2,
-    image: Hoddie2,
-    title: "LHR London England Hoodie",
-    category: "Hoddie",
-    price: "$250",
-  },
-  {
-    id: 3,
-    image: Hoddie3,
-    title: "Retro Rapper Tupac Hoodie",
-    category: "Hoddie",
-    price: "$100",
-  },
-  {
-    id: 4,
-    image: Hoddie4,
-    title: "Hip Hop Street Wear Hoodie",
-    category: "Hoddie",
-    price: "$120",
-  },
-];
-
-const OurCollection = () => {
+const OurCollection = ({ products }: Props) => {
   const [activeCategory, setActiveCategory] = useState("Hoodie");
   return (
     <section className="flex flex-col space-y-12 px-16 py-6 overflow-hidden w-full pt-20">
@@ -83,12 +49,12 @@ const OurCollection = () => {
         </Link>
       </div>
       <div className="grid grid-cols-4 gap-6">
-        {products.map((item) => (
+        {products?.map((item) => (
           <ProductCard
             key={item.id}
             id={item.id}
             image={item.image}
-            title={item.title}
+            name={item.name}
             price={item.price}
           />
         ))}

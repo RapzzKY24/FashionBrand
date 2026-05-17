@@ -2,14 +2,14 @@ import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import { EyeIcon } from "lucide-react";
 
-type ProductCardProps = {
-  id: number;
+export type ProductCardProps = {
+  id: string;
   image: string | StaticImageData;
-  title: string;
-  price: string;
+  name: string;
+  price: number;
 };
 
-export const ProductCard = ({ id, image, title, price }: ProductCardProps) => {
+export const ProductCard = ({ id, image, name, price }: ProductCardProps) => {
   return (
     <div className="flex flex-col justify-center gap-y-4">
       <div className="group relative bg-gray-100 w-full h-[550px] px-6 py-8 overflow-hidden rounded-md">
@@ -24,7 +24,7 @@ export const ProductCard = ({ id, image, title, price }: ProductCardProps) => {
         {/* Image */}
         <Image
           src={image}
-          alt={title}
+          alt="product"
           width={700}
           height={800}
           className="object-contain absolute bottom-0 left-0 w-full h-full transition-transform duration-500 group-hover:scale-105"
@@ -47,7 +47,7 @@ export const ProductCard = ({ id, image, title, price }: ProductCardProps) => {
 
       {/* Footer */}
       <div className="flex items-center justify-between px-2">
-        <h1 className="font-roboto font-semibold text-[16px]">{title}</h1>
+        <h1 className="font-roboto font-semibold text-[16px]">{name}</h1>
 
         <h1 className="font-roboto font-semibold text-[16px]">{price}</h1>
       </div>

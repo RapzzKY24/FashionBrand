@@ -7,28 +7,31 @@ import ProductInfo from "@/src/pages/shop/components/ProductInfo";
 import QuantityActions from "@/src/pages/shop/components/QuantityActions";
 import RelatedProducts from "@/src/pages/shop/components/RelatedProducts";
 import SizeSelector from "@/src/pages/shop/components/SizeSelector";
+import { ProductService } from "@/src/services/product";
 
 export default async function ProductDetailPage({
   params,
 }: {
-  params: Promise<{ id: number }>;
+  params: Promise<{ slug: string }>;
 }) {
-  const { id } = await params;
-  const product = products.find((item) => item.id == id);
+  const { slug } = await params;
+  const product = await ProductService.getBySlug(slug);
+
+  const relatedProduct = await ProductService.getRelatedProduct(slug);
 
   if (!product) return null;
 
   return (
     <section className="flex flex-col space-y-16 px-16 py-6 overflow-hidden w-full pt-30">
-      <ProductBreadcrumb title={product.title} />
+      <ProductBreadcrumb title={product.name} />
 
       <div className="grid grid-cols-12 gap-12 w-full">
-        <ProductGallery image={product.image} title={product.title} />
+        <ProductGallery image={product.image} title={product.name} />
 
         <div className="col-span-5 flex flex-col justify-center gap-y-7">
           <ProductInfo
             category={product.category}
-            title={product.title}
+            title={product.name}
             price={product.price}
           />
 
@@ -41,7 +44,7 @@ export default async function ProductDetailPage({
         </div>
       </div>
 
-      <RelatedProducts products={products.slice(0, 3)} />
+      <RelatedProducts products={relatedProduct} />
     </section>
   );
 }

@@ -1,7 +1,7 @@
 type Props = {
   category: string;
   title: string;
-  price: string;
+  price: number;
 };
 
 export default function ProductInfo({ category, title, price }: Props) {
