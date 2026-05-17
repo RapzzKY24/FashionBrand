@@ -1,0 +1,52 @@
+import { ArrowRightIcon, EyeIcon } from "lucide-react";
+import Link from "next/link";
+import React from "react";
+import { loginAction } from "../actions/authAction";
+
+export const LoginForm = () => {
+  return (
+    <form className="mt-10 space-y-6" action={loginAction}>
+      <div>
+        <label className="font-roboto text-sm">Email Address</label>
+        <input
+          name="email"
+          type="email"
+          placeholder="you@example.com"
+          className="mt-3 h-14 w-full rounded-md border border-gray-300 px-4 font-roboto text-sm outline-none"
+        />
+      </div>
+
+      <div>
+        <label className="font-roboto text-sm">Password</label>
+        <div className="relative mt-3">
+          <input
+            name="password"
+            type="password"
+            placeholder="Enter your password"
+            className="h-14 w-full rounded-md border border-gray-300 px-4 pr-12 font-roboto text-sm outline-none"
+          />
+          <EyeIcon
+            size={18}
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500"
+          />
+        </div>
+      </div>
+
+      <div className="flex items-center justify-between">
+        <label className="flex items-center gap-3 font-roboto text-sm text-gray-500">
+          <input type="checkbox" className="h-4 w-4" />
+          Remember me
+        </label>
+
+        <Link href="#" className="font-roboto text-sm text-black">
+          Forgot password?
+        </Link>
+      </div>
+
+      <button className="flex h-14 w-full items-center justify-center gap-3 rounded-md bg-black font-roboto text-sm uppercase tracking-[0.12em] text-white hover:bg-neutral-800">
+        Login
+        <ArrowRightIcon size={16} />
+      </button>
+    </form>
+  );
+};

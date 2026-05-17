@@ -13,6 +13,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { logoutAction } from "../features/auth/actions/authAction";
 
 const menuItems = [
   { title: "Overview", href: "/users", icon: HomeIcon },
@@ -75,11 +76,15 @@ const UserSidebar = () => {
             </Link>
           );
         })}
-
-        <button className="flex w-full items-center gap-4 rounded-md px-5 py-4 font-roboto text-sm text-black hover:bg-gray-50">
-          <LogOutIcon size={18} />
-          <span>Logout</span>
-        </button>
+        <form action={logoutAction}>
+          <button
+            className="flex w-full items-center gap-4 rounded-md px-5 py-4 font-roboto text-sm text-black hover:bg-gray-50"
+            type="submit"
+          >
+            <LogOutIcon size={18} />
+            <span>Logout</span>
+          </button>
+        </form>
       </nav>
     </aside>
   );
