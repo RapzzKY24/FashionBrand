@@ -35,7 +35,7 @@ const socialLinks = [
 
 const Footer = () => {
   return (
-    <footer className="bg-[#121212] text-white px-16 pt-28 pb-10">
+    <footer className="bg-[#121212] text-white px-16 pt-28 pb-10 mt-40">
       <div className="grid grid-cols-12 gap-12 items-start">
         <div className="col-span-6">
           <Link href="/">

@@ -98,10 +98,12 @@ const CollectionsPage = () => {
       {/* Hero */}
       <div className="grid grid-cols-12 items-center bg-linear-to-r from-white via-neutral-50 to-white px-16">
         <div className="col-span-6 py-6">
-          <div className="flex items-center gap-2 font-roboto text-sm">
-            <Link href="/home">Home</Link>
+          <div className="flex items-center gap-2 text-sm font-roboto text-gray-400 uppercase tracking-[0.08em]">
+            <Link href="/home" className="hover:text-black transition">
+              Home
+            </Link>
             <span>/</span>
-            <span>Collections</span>
+            <span className="text-black font-medium">Collections</span>
           </div>
 
           <h1 className="mt-5 font-barlow text-7xl font-extrabold uppercase tracking-[0.04em] text-black">
@@ -109,8 +111,7 @@ const CollectionsPage = () => {
           </h1>
 
           <p className="mt-5 max-w-md font-roboto text-base font-light leading-7 text-gray-400">
-            Curated collections, designed with purpose. Explore timeless styles
-            made for every moment.
+            Curated collections, designed with purpose
           </p>
         </div>
       </div>

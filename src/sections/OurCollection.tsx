@@ -56,6 +56,7 @@ const OurCollection = ({ products }: Props) => {
             image={item.image}
             name={item.name}
             price={item.price}
+            stock_status={item.stock_status}
           />
         ))}
       </div>

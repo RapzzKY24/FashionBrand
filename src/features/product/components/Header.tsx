@@ -1,17 +1,20 @@
 import Link from "next/link";
-import React from "react";
 
 const Header = () => {
   return (
     <div className="flex flex-col justify-center gap-y-2">
-      <div className="flex items-center gap-2 font-roboto text-sm">
-        <Link href="/home">Home</Link>
-        <span>/</span>
-        <span>Shop</span>
+      <div className="flex flex-col justify-center">
+        <div className="flex items-center gap-2 text-sm font-roboto text-gray-400 uppercase tracking-[0.08em]">
+          <Link href="/home" className="hover:text-black transition">
+            Home
+          </Link>
+          <span>/</span>
+          <span className="text-black font-medium">SHOP</span>
+        </div>
+        <h1 className="text-6xl font-barlow font-extrabold text-black uppercase tracking-[0.08rem]">
+          OUR PRODUCT
+        </h1>
       </div>
-      <h1 className="text-6xl font-barlow font-extrabold text-black uppercase tracking-[0.08rem]">
-        SHOP
-      </h1>
       <div className="flex justify-between items-center">
         <p className="text-[16px] text-gray-400 font-roboto font-light ">
           Minimal Silhouettes Crafted For Everyday Expression.

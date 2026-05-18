@@ -8,7 +8,6 @@ import { ProductService } from "@/src/features/product/services/product";
 
 export default async function Home() {
   const featuredProduct = await ProductService.getFeaturedProduct();
-  console.log(featuredProduct);
   return (
     <main>
       <HeroSection />
