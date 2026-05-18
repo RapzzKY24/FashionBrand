@@ -1,3 +1,5 @@
+import { formatRupiah } from "@/src/utils/formatCurrency";
+
 type Props = {
   category: string;
   title: string;
@@ -16,7 +18,7 @@ export default function ProductInfo({ category, title, price }: Props) {
       </h1>
 
       <p className="font-roboto font-semibold text-black text-2xl tracking-wide">
-        {price}
+        {formatRupiah(price)}
       </p>
 
       <p className="max-w-lg text-[15px] leading-7 font-light text-gray-500 font-roboto">

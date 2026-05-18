@@ -1,6 +1,4 @@
-import { products } from "@/src/data/Product";
 import ColorSelector from "@/src/features/product/components/CollorSelector";
-import ProductAccordion from "@/src/features/product/components/ProductAccordion";
 import ProductBreadcrumb from "@/src/features/product/components/ProductBreadcrumb";
 import ProductGallery from "@/src/features/product/components/ProductGallery";
 import ProductInfo from "@/src/features/product/components/ProductInfo";
@@ -39,8 +37,11 @@ export default async function ProductDetailPage({
 
           <ColorSelector />
           <SizeSelector />
-          <QuantityActions />
-          <ProductAccordion />
+          <QuantityActions
+            productId={product.id}
+            stock_status={product.stock_status}
+          />
+          {/* <ProductAccordion /> */}
         </div>
       </div>
 
