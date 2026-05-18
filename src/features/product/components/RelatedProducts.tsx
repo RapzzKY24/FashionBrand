@@ -1,18 +1,9 @@
 import Link from "next/link";
 import { ArrowRightIcon } from "lucide-react";
-import { ProductCard } from "@/src/components/ProductCard";
-import { StaticImageData } from "next/image";
-
-type Product = {
-  id: string;
-  image: StaticImageData | string;
-  name: string;
-  category: string;
-  price: number;
-};
+import { ProductCard, ProductCardProps } from "@/src/components/ProductCard";
 
 export type Props = {
-  products: Product[];
+  products: ProductCardProps[];
 };
 
 export default function RelatedProducts({ products }: Props) {
@@ -44,6 +35,7 @@ export default function RelatedProducts({ products }: Props) {
                 image={item.image}
                 name={item.name}
                 price={item.price}
+                stock_status={item.stock_status}
               />
             ))}
           </div>
