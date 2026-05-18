@@ -31,6 +31,7 @@ export const CartClient = () => {
           shipping={shipping}
           discount={discount}
           total={total}
+          totalItems={items.length}
         />
       </div>
     </section>

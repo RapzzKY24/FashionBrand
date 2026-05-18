@@ -1,5 +1,4 @@
 import {
-  BanknoteIcon,
   HeadphonesIcon,
   RefreshCcwIcon,
   ShieldCheckIcon,
@@ -7,12 +6,14 @@ import {
 } from "lucide-react";
 import { InfoItem } from "./infoItem";
 import { formatRupiah } from "@/src/utils/formatCurrency";
+import Link from "next/link";
 
 type OrderSummaryProps = {
   subtotal: number;
   shipping: number;
   discount: number;
   total: number;
+  totalItems: number;
 };
 
 export const OrderSummary = ({
@@ -20,7 +21,9 @@ export const OrderSummary = ({
   shipping,
   discount,
   total,
+  totalItems,
 }: OrderSummaryProps) => {
+  const isCartEmpty = totalItems === 0;
   return (
     <aside className="col-span-3 space-y-6">
       <div className="border border-gray-200 rounded-md p-7 bg-white">
@@ -66,17 +69,18 @@ export const OrderSummary = ({
           </div>
         </div>
 
-        <button className="w-full h-14 bg-black text-white rounded-md font-roboto text-sm uppercase tracking-[0.25em] hover:bg-neutral-800 transition">
-          Checkout
-        </button>
-
-        <button className="mt-4 w-full h-14 bg-white border border-black rounded-md font-roboto text-xl font-semibold hover:bg-gray-100 transition">
-          <div className="flex items-center justify-center gap-x-2">
-            <BanknoteIcon />
-            Pay
-          </div>
-        </button>
-
+        <Link href={isCartEmpty ? "/" : "/checkout"} className="block">
+          <button
+            disabled={isCartEmpty}
+            className={`h-14 w-full rounded-md font-roboto text-sm uppercase tracking-[0.25em] transition ${
+              isCartEmpty
+                ? "cursor-not-allowed bg-gray-300 text-gray-500"
+                : "bg-black text-white hover:bg-neutral-800"
+            }`}
+          >
+            {isCartEmpty ? "Cart is Empty" : "Checkout"}
+          </button>
+        </Link>
         <div className="mt-7">
           <p className="font-roboto text-xs text-gray-500 mb-3">We accept</p>
 
