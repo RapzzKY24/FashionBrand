@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   LogInIcon,
   SearchIcon,
@@ -10,6 +10,7 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import SearchModal from "./SearchModal";
+import { useCartStore } from "../features/product/store/store";
 
 type Props = {
   isLoggedIn: boolean;
@@ -23,6 +24,11 @@ const NAV_ITEMS = [
 ];
 
 const NavbarClient = ({ isLoggedIn, userRole }: Props) => {
+  const totalItems = useCartStore((state) => state.totalItems);
+  const fetchCart = useCartStore((state) => state.fetchCart);
+  useEffect(() => {
+    fetchCart();
+  });
   const pathname = usePathname();
   const [openSearch, setOpenSearch] = useState(false);
 
@@ -86,11 +92,13 @@ const NavbarClient = ({ isLoggedIn, userRole }: Props) => {
             )}
 
             <span className="relative">
-              <div className="absolute -right-1.5 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-600">
-                <span className="text-[10px] font-bold leading-none text-white">
-                  3
-                </span>
-              </div>
+              {totalItems > 0 && (
+                <div className="absolute -right-1.5 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-600">
+                  <span className="text-[10px] font-bold leading-none text-white">
+                    {totalItems}
+                  </span>
+                </div>
+              )}
 
               <Link href="/cart">
                 <ShoppingCartIcon
