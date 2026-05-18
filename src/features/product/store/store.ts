@@ -35,6 +35,15 @@ export const useCartStore = create<CartState>((set) => ({
     const res = await fetch("/api/cart");
     const json = await res.json();
 
+    if (!res.ok) {
+      set({
+        items: [],
+        totalItems: 0,
+        totalPrice: 0,
+      });
+      return;
+    }
+
     set({
       items: json.data.items,
       totalItems: json.data.total_items,

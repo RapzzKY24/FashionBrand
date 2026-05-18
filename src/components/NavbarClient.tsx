@@ -27,8 +27,10 @@ const NavbarClient = ({ isLoggedIn, userRole }: Props) => {
   const totalItems = useCartStore((state) => state.totalItems);
   const fetchCart = useCartStore((state) => state.fetchCart);
   useEffect(() => {
-    fetchCart();
-  });
+    if (isLoggedIn) {
+      fetchCart();
+    }
+  }, [isLoggedIn, fetchCart]);
   const pathname = usePathname();
   const [openSearch, setOpenSearch] = useState(false);
 

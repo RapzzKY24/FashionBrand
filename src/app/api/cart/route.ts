@@ -2,6 +2,22 @@ import { cookies } from "next/headers";
 
 export async function GET() {
   const token = (await cookies()).get("token")?.value;
+
+  if (!token) {
+    return Response.json(
+      {
+        status: "error",
+        message: "Unauthorized",
+        data: {
+          items: [],
+          total_items: 0,
+          total_price: 0,
+        },
+      },
+      { status: 401 },
+    );
+  }
+
   const res = await fetch("http://localhost:8080/api/v1/cart", {
     headers: {
       Authorization: `Bearer ${token}`,
