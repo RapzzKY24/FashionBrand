@@ -3,7 +3,7 @@ export const CartHeader = () => {
   return (
     <div className="flex flex-col justify-center gap-y-2.5">
       <div className="flex items-center gap-2 text-sm font-roboto text-gray-400 uppercase tracking-[0.08em]">
-        <Link href="/home" className="hover:text-black transition">
+        <Link href="/" className="hover:text-black transition">
           Home
         </Link>
         <span>/</span> <span className="text-black font-medium">CART</span>

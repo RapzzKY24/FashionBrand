@@ -5,6 +5,7 @@ import { useCartStore } from "../../product/store/store";
 import { CartHeader } from "../components/cartHeader";
 import { CartTable } from "../components/cartTable";
 import { OrderSummary } from "../components/orderSummaryt";
+import Reveal from "@/src/animations/Reveal";
 
 export const CartClient = () => {
   const items = useCartStore((state) => state.items);
@@ -21,18 +22,22 @@ export const CartClient = () => {
 
   return (
     <section className="px-16 py-6 overflow-hidden w-full pt-26 flex flex-col gap-y-8">
-      <CartHeader />
+      <Reveal>
+        <CartHeader />
+      </Reveal>
 
       <div className="grid grid-cols-12 gap-8 items-start">
         <CartTable items={items} />
 
-        <OrderSummary
-          subtotal={totalPrice}
-          shipping={shipping}
-          discount={discount}
-          total={total}
-          totalItems={items.length}
-        />
+        <Reveal delay={0.2} className="col-span-3">
+          <OrderSummary
+            subtotal={totalPrice}
+            shipping={shipping}
+            discount={discount}
+            total={total}
+            totalItems={items.length}
+          />
+        </Reveal>
       </div>
     </section>
   );

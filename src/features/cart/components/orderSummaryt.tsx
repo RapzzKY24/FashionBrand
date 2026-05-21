@@ -68,7 +68,6 @@ export const OrderSummary = ({
             </p>
           </div>
         </div>
-
         <Link href={isCartEmpty ? "/" : "/checkout"} className="block">
           <button
             disabled={isCartEmpty}

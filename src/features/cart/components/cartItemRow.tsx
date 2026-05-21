@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { HeartIcon, MinusIcon, PlusIcon, XIcon } from "lucide-react";
 import { CartItem, useCartStore } from "../../product/store/store";
 import { formatRupiah } from "@/src/utils/formatCurrency";
@@ -12,7 +13,13 @@ export const CartItemRow = ({ item }: CartItemRowProps) => {
   const updateQty = useCartStore((state) => state.updateQuantity);
   const removeItem = useCartStore((state) => state.removeItem);
   return (
-    <div className="grid grid-cols-12 items-center gap-6 py-6 border-b border-gray-200 last:border-b-0">
+    <motion.div
+      className="grid grid-cols-12 items-center gap-6 py-6 border-b border-gray-200 last:border-b-0"
+      layout
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: 20, transition: { duration: 0.2 } }}
+    >
       <div className="col-span-5 flex items-center gap-7">
         <div className="relative w-40 h-40 bg-neutral-100 rounded-md overflow-hidden">
           <Image
@@ -58,9 +65,15 @@ export const CartItemRow = ({ item }: CartItemRowProps) => {
             <MinusIcon size={16} />
           </button>
 
-          <div className="flex-1 flex items-center justify-center font-roboto text-[16px]">
+          <motion.div
+            className="flex-1 flex items-center justify-center font-roboto text-[16px]"
+            key={item.quantity}
+            initial={{ scale: 1.2 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.15 }}
+          >
             {item.quantity}
-          </div>
+          </motion.div>
 
           <button
             className="flex-1 flex items-center justify-center hover:bg-gray-50 transition"
@@ -83,6 +96,6 @@ export const CartItemRow = ({ item }: CartItemRowProps) => {
           <XIcon size={18} />
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 };
