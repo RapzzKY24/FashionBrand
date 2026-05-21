@@ -33,7 +33,7 @@ export async function loginAction(formData: FormData) {
     maxAge: 60 * 60 * 24 * 7,
   });
 
-  redirect(user.role === "admin" ? "/admin" : "/home");
+  redirect(user.role === "admin" ? "/admin" : "/");
 }
 
 export async function registerAction(formData: FormData) {
@@ -59,5 +59,5 @@ export async function logoutAction(): Promise<void> {
   cookieStore.delete("token");
   cookieStore.delete("user_role");
 
-  redirect("/home");
+  redirect("/");
 }

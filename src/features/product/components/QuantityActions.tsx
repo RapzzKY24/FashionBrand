@@ -1,3 +1,4 @@
+import AnimatedButton from "@/src/components/AnimatedButton";
 import ButtonAddToCart from "./ButtonAddToCart";
 
 export default function QuantityActions({
@@ -15,9 +16,9 @@ export default function QuantityActions({
 
       <div className="flex items-center gap-5">
         <ButtonAddToCart productId={productId} stock_status={stock_status} />
-        <button className="flex-1 h-14 bg-white border border-black rounded-xl text-black font-roboto text-sm uppercase tracking-[0.08em] hover:bg-gray-100 transition">
+        <AnimatedButton className="flex-1 h-14 bg-white text-black border border-black rounded-xl font-roboto text-sm uppercase tracking-[0.08em]">
           Buy Now
-        </button>
+        </AnimatedButton>
       </div>
     </div>
   );

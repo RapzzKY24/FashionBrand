@@ -6,7 +6,7 @@ export const CollectionsHero = () => {
       <div className="col-span-6 py-6">
         <div className="flex flex-col justify-center">
           <div className="flex items-center gap-2 font-roboto text-sm uppercase tracking-[0.08em] text-gray-400">
-            <Link href="/home" className="transition hover:text-black">
+            <Link href="/" className="transition hover:text-black">
               Home
             </Link>
             <span>/</span>

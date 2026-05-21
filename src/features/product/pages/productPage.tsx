@@ -2,6 +2,10 @@ import FilterPanelProduct from "@/src/features/product/components/FilterPanelPro
 import Header from "@/src/features/product/components/Header";
 import { ProductCard } from "@/src/components/ProductCard";
 import { ProductService } from "@/src/features/product/services/product";
+import {
+  ProductGrid,
+  ProductGridItem,
+} from "@/src/animations/ProductGrid";
 
 const ProductPages = async () => {
   const products = await ProductService.getAllProduct();
@@ -12,18 +16,19 @@ const ProductPages = async () => {
         <div className="col-span-1 h-fit">
           <FilterPanelProduct />
         </div>
-        <div className="col-span-3 grid grid-cols-3 gap-4 ">
+        <ProductGrid className="col-span-3 grid grid-cols-3 gap-4">
           {products?.data.map((item) => (
-            <ProductCard
-              key={item.id}
-              id={item.id}
-              image={item.image}
-              name={item.name}
-              price={item.price}
-              stock_status={item.stock_status}
-            />
+            <ProductGridItem key={item.id}>
+              <ProductCard
+                id={item.id}
+                image={item.image}
+                name={item.name}
+                price={item.price}
+                stock_status={item.stock_status}
+              />
+            </ProductGridItem>
           ))}
-        </div>
+        </ProductGrid>
       </div>
     </section>
   );
