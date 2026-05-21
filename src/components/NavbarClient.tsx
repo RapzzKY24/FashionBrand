@@ -18,7 +18,7 @@ type Props = {
 };
 
 const NAV_ITEMS = [
-  { title: "Home", links: "/home" },
+  { title: "Home", links: "/" },
   { title: "Shop", links: "/shop" },
   { title: "Collections", links: "/collections" },
 ];
@@ -68,7 +68,7 @@ const NavbarClient = ({ isLoggedIn, userRole }: Props) => {
             })}
           </div>
 
-          <Link href="/home">
+          <Link href="/">
             <h1 className="font-barlow text-4xl font-bold uppercase">
               reflect
             </h1>
