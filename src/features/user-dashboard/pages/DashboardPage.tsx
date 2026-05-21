@@ -1,4 +1,3 @@
-import { cookies } from "next/headers";
 import { AccountService } from "../../account-details/services/account";
 import { OrderService } from "../../orders/services/orders";
 import { WishlistService } from "../../wishlist/services/wishlist";
@@ -16,8 +15,7 @@ export default async function DashboardPage() {
     OrderService.getOrders(),
   ]);
 
-  const token = (await cookies()).get("token")?.value;
-  const wishlist = token ? await WishlistService.getAll(token) : [];
+  const wishlist = await WishlistService.getAll();
 
   const inTransit = orders.filter(
     (o) => o.shipping_status === "in_transit"

@@ -1,25 +1,18 @@
-import { cookies } from "next/headers";
+import { apiFetch } from "@/src/shared/api";
 import { CheckoutClient } from "./CheckoutClient";
-
-async function getData(path: string) {
-  const token = (await cookies()).get("token")?.value;
-
-  const res = await fetch(`http://localhost:8080/api/v1${path}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    cache: "no-store",
-  });
-
-  const json = await res.json();
-  return json.data;
-}
+import { Address, Cart, Profile } from "../types/checkout.types";
 
 export default async function CheckoutPage() {
   const [profile, addresses, cart] = await Promise.all([
-    getData("/me"),
-    getData("/addresses"),
-    getData("/cart"),
+    apiFetch<{ data: Profile }>("/me", { cache: "no-store" }).then(
+      (r) => r.data,
+    ),
+    apiFetch<{ data: Address[] }>("/addresses", { cache: "no-store" }).then(
+      (r) => r.data,
+    ),
+    apiFetch<{ data: Cart }>("/cart", { cache: "no-store" }).then(
+      (r) => r.data,
+    ),
   ]);
 
   return <CheckoutClient profile={profile} addresses={addresses} cart={cart} />;

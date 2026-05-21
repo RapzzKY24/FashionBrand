@@ -1,3 +1,5 @@
+import { apiFetch } from "@/src/shared/api";
+
 export type ProductItem = {
   id: string;
   name: string;
@@ -26,25 +28,18 @@ export type ProductDetailResponse = {
 
 export const ProductService = {
   getAllProduct: async () => {
-    const res = await fetch("http://localhost:8080/api/v1/products");
-    const resJson = (await res.json()) as ProductResponse;
-    return resJson;
+    return await apiFetch<ProductResponse>("/products");
   },
   getBySlug: async (slug: string) => {
-    const res = await fetch(`http://localhost:8080/api/v1/products/${slug}`);
-    const resJson = (await res.json()) as ProductDetailResponse;
-    return resJson?.data;
+    const res = await apiFetch<ProductDetailResponse>(`/products/${slug}`);
+    return res?.data;
   },
   getRelatedProduct: async (id: string) => {
-    const res = await fetch(
-      `http://localhost:8080/api/v1/products/${id}/related`,
-    );
-    const resJson = (await res.json()) as ProductResponse;
-    return resJson?.data;
+    const res = await apiFetch<ProductResponse>(`/products/${id}/related`);
+    return res?.data;
   },
   getFeaturedProduct: async () => {
-    const res = await fetch("http://localhost:8080/api/v1/products/featured");
-    const resJson = (await res.json()) as ProductResponse;
-    return resJson?.data;
+    const res = await apiFetch<ProductResponse>("/products/featured");
+    return res?.data;
   },
 };

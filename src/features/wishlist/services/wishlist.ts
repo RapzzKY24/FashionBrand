@@ -1,4 +1,5 @@
-const BASE_URL = "http://localhost:8080/api/v1";
+import { apiFetch } from "@/src/shared/api";
+import { ApiError } from "@/src/shared/api/errors";
 
 export type WishlistResponse = {
   status: string;
@@ -22,29 +23,32 @@ export type WishlistItem = {
 };
 
 export const WishlistService = {
-  add: async (token: string, productId: string): Promise<WishlistResponse> => {
-    const res = await fetch(`${BASE_URL}/wishlist`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ product_id: productId }),
-    });
-
-    const json = (await res.json()) as WishlistResponse;
-    return json;
+  add: async (productId: string): Promise<WishlistResponse> => {
+    try {
+      return await apiFetch<WishlistResponse>("/wishlist", {
+        method: "POST",
+        body: { product_id: productId },
+      });
+    } catch (e) {
+      if (e instanceof ApiError) {
+        return {
+          status: "error",
+          message: e.message,
+          data: e.data,
+        };
+      }
+      return { status: "error", message: "Something went wrong" };
+    }
   },
 
-  getAll: async (token: string): Promise<WishlistItem[]> => {
-    const res = await fetch(`${BASE_URL}/wishlist`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      cache: "no-store",
-    });
-
-    const json = await res.json();
-    return json.data ?? [];
+  getAll: async (): Promise<WishlistItem[]> => {
+    try {
+      const json = await apiFetch<{ data: WishlistItem[] }>("/wishlist", {
+        cache: "no-store",
+      });
+      return json.data ?? [];
+    } catch {
+      return [];
+    }
   },
 };

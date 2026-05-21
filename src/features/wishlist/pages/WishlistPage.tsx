@@ -8,7 +8,6 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { cookies } from "next/headers";
 import { WishlistService } from "../services/wishlist";
 import { formatRupiah } from "@/src/utils/formatCurrency";
 
@@ -22,8 +21,7 @@ const formatDate = (dateStr: string) => {
 };
 
 export default async function WishlistPage() {
-  const token = (await cookies()).get("token")?.value;
-  const items = token ? await WishlistService.getAll(token) : [];
+  const items = await WishlistService.getAll();
 
   return (
     <section className="space-y-8">

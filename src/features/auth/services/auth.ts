@@ -1,3 +1,5 @@
+import { apiFetch } from "@/src/shared/api";
+
 type ApiResponse<T> = {
   status: string;
   message: string;
@@ -27,38 +29,16 @@ export type AuthResponse = {
 
 export const AuthService = {
   login: async (form: LoginFormDto) => {
-    const res = await fetch("http://localhost:8080/api/v1/auth/login", {
+    return await apiFetch<ApiResponse<AuthResponse>>("/auth/login", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(form),
-      cache: "no-store",
+      body: form,
     });
-
-    const resJson = (await res.json()) as ApiResponse<AuthResponse>;
-
-    if (!res.ok) {
-      throw new Error(resJson.message || "Login failed");
-    }
-
-    return resJson;
   },
+
   register: async (form: RegisterFormDto) => {
-    const res = await fetch("http://localhost:8080/api/v1/auth/register", {
+    return await apiFetch<ApiResponse<AuthResponse>>("/auth/register", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(form),
-      cache: "no-store",
+      body: form,
     });
-    const resJson = (await res.json()) as ApiResponse<AuthResponse>;
-
-    if (!res.ok) {
-      throw new Error(resJson.message || "Login failed");
-    }
-
-    return resJson;
   },
 };
