@@ -7,6 +7,7 @@ import RelatedProducts from "@/src/features/product/components/RelatedProducts";
 import SizeSelector from "@/src/features/product/components/SizeSelector";
 import WishlistButton from "@/src/features/product/components/WishlistButton";
 import { ProductService } from "@/src/features/product/services/product";
+import Reveal from "@/src/animations/Reveal";
 
 export default async function ProductDetailPage({
   params,
@@ -22,7 +23,9 @@ export default async function ProductDetailPage({
 
   return (
     <section className="flex flex-col space-y-16 px-16 py-6 overflow-hidden w-full pt-30">
-      <ProductBreadcrumb title={product.name} />
+      <Reveal>
+        <ProductBreadcrumb title={product.name} />
+      </Reveal>
 
       <div className="grid grid-cols-12 gap-12 w-full">
         <ProductGallery image={product.image} title={product.name}>
@@ -44,7 +47,6 @@ export default async function ProductDetailPage({
             productId={product.id}
             stock_status={product.stock_status}
           />
-          {/* <ProductAccordion /> */}
         </div>
       </div>
 
