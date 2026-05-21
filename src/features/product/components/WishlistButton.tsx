@@ -1,29 +1,14 @@
 "use client";
 
-import { useState } from "react";
 import { HeartIcon } from "lucide-react";
-import { toast } from "sonner";
-import { addToWishlistAction } from "@/src/features/wishlist/actions/wishlistAction";
+import { useWishlist } from "@/src/features/wishlist/hooks/useWishlist";
 
 type WishlistButtonProps = {
   productId: string;
 };
 
 const WishlistButton = ({ productId }: WishlistButtonProps) => {
-  const [isLiked, setIsLiked] = useState(false);
-
-  const handleClick = async () => {
-    if (isLiked) return;
-
-    const result = await addToWishlistAction(productId);
-
-    if (result.success) {
-      setIsLiked(true);
-      toast.success(result.message);
-    } else {
-      toast.error(result.message);
-    }
-  };
+  const { isLiked, handleClick } = useWishlist(productId);
 
   return (
     <button
