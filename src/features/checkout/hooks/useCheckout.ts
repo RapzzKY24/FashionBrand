@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Address, Cart } from "../types/checkout.types";
+import { CheckoutService } from "../services/checkout";
 
 type UseCheckoutProps = {
   addresses: Address[];
@@ -43,22 +44,9 @@ export const useCheckout = ({ addresses, cart }: UseCheckoutProps) => {
       return;
     }
 
-    const res = await fetch("/api/checkout", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ address_id: selectedAddressId }),
-    });
+    const data = await CheckoutService.createCheckout(selectedAddressId);
 
-    const json = await res.json();
-
-    if (!res.ok) {
-      alert(json.message || "Checkout failed");
-      return;
-    }
-
-    router.push(`/users/orders/${json.data.id}`);
+    router.push(`/users/orders/${data?.id}`);
   };
 
   return {
