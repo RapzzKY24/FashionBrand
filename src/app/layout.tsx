@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Roboto, Barlow_Condensed } from "next/font/google";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 const roboto = Roboto({
@@ -32,6 +33,7 @@ export default function RootLayout({
         {/* <Navbar /> */}
         <main>{children}</main>
         {/* <Footer /> */}
+        <Toaster position="top-center" richColors />
       </body>
     </html>
   );

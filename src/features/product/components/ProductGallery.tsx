@@ -1,12 +1,15 @@
 import Image, { StaticImageData } from "next/image";
 import { ArrowDown, ArrowUp } from "lucide-react";
 
+import { ReactNode } from "react";
+
 type Props = {
   image: StaticImageData | string;
   title: string;
+  children?: ReactNode;
 };
 
-export default function ProductGallery({ image, title }: Props) {
+export default function ProductGallery({ image, title, children }: Props) {
   return (
     <>
       <aside className="col-span-1 flex flex-col gap-y-4">
@@ -50,6 +53,7 @@ export default function ProductGallery({ image, title }: Props) {
           className="object-contain"
           priority
         />
+        {children}
       </div>
     </>
   );
