@@ -12,14 +12,17 @@ export const CategoryButton = ({
   return (
     <button
       onClick={onClick}
-      className={`px-4 py-3 rounded-sm min-w-[140px] transition-all duration-200
+      className={`group relative overflow-hidden rounded-sm min-w-[140px] border px-4 py-3 transition-colors duration-200
         ${
           active
-            ? "bg-black text-white"
-            : "bg-white outline outline-gray-400 text-black"
+            ? "bg-black text-white border-black"
+            : "bg-white text-black border-gray-400 hover:border-black"
         }`}
     >
-      <h1 className="text-center font-roboto text-[16px] font-bold">{title}</h1>
+      <span className="absolute inset-0 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out" />
+      <h1 className="relative z-10 text-center font-roboto text-[16px] font-bold group-hover:text-white transition-colors duration-200">
+        {title}
+      </h1>
     </button>
   );
 };
