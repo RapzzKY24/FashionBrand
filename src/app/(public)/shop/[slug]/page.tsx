@@ -5,6 +5,7 @@ import ProductInfo from "@/src/features/product/components/ProductInfo";
 import QuantityActions from "@/src/features/product/components/QuantityActions";
 import RelatedProducts from "@/src/features/product/components/RelatedProducts";
 import SizeSelector from "@/src/features/product/components/SizeSelector";
+import WishlistButton from "@/src/features/product/components/WishlistButton";
 import { ProductService } from "@/src/features/product/services/product";
 
 export default async function ProductDetailPage({
@@ -24,7 +25,9 @@ export default async function ProductDetailPage({
       <ProductBreadcrumb title={product.name} />
 
       <div className="grid grid-cols-12 gap-12 w-full">
-        <ProductGallery image={product.image} title={product.name} />
+        <ProductGallery image={product.image} title={product.name}>
+          <WishlistButton productId={product.id} />
+        </ProductGallery>
 
         <div className="col-span-5 flex flex-col justify-center gap-y-7">
           <ProductInfo
