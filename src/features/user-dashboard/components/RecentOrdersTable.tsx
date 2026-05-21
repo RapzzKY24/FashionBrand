@@ -23,7 +23,7 @@ const formatStatus = (status: string) => {
 
 export const RecentOrdersTable = ({ orders }: RecentOrdersTableProps) => {
   return (
-    <div className="col-span-7 rounded-md border border-gray-200 bg-white p-6">
+    <div className="col-span-7 rounded-md border border-gray-200 bg-white p-6 h-fit">
       <div className="flex items-center justify-between">
         <h2 className="font-roboto text-sm font-bold uppercase tracking-[0.18em]">
           Recent Orders

@@ -26,24 +26,28 @@ export const StatsGrid = ({
       value: String(totalOrders),
       action: "View all orders",
       icon: ShoppingBagIcon,
+      href: "/users/orders",
     },
     {
       title: "In Transit",
       value: String(inTransit),
       action: "Track your orders",
       icon: TruckIcon,
+      href: "/users/orders",
     },
     {
       title: "Delivered",
       value: String(delivered),
       action: "View delivered orders",
       icon: PackageIcon,
+      href: "/users/orders",
     },
     {
       title: "Wishlist Items",
       value: String(wishlistCount),
       action: "View your wishlist",
       icon: HeartIcon,
+      href: "/users/wishlist",
     },
   ];
 

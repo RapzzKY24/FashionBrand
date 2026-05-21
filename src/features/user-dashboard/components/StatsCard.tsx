@@ -1,5 +1,6 @@
 import { ArrowRightIcon } from "lucide-react";
 import { StatCardDef } from "../types/dashboard.types";
+import Link from "next/link";
 
 type StatsCardProps = {
   item: StatCardDef;
@@ -23,10 +24,12 @@ export const StatsCard = ({ item }: StatsCardProps) => {
       </div>
 
       <div className="mt-8 border-t border-gray-200 pt-5">
-        <button className="flex items-center gap-3 font-roboto text-sm text-black">
-          {item.action}
-          <ArrowRightIcon size={16} />
-        </button>
+        <Link href={item.href}>
+          <button className="flex items-center gap-3 font-roboto text-sm text-black cursor-pointer">
+            {item.action}
+            <ArrowRightIcon size={16} />
+          </button>
+        </Link>
       </div>
     </div>
   );

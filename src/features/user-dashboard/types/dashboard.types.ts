@@ -5,4 +5,5 @@ export type StatCardDef = {
   value: string;
   action: string;
   icon: LucideIcon;
+  href: string;
 };
