@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import {
   LogInIcon,
   SearchIcon,
@@ -8,9 +7,8 @@ import {
   UserIcon,
 } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import SearchModal from "./SearchModal";
-import { useCartStore } from "../features/product/store/store";
+import { useNavbar } from "../hooks/useNavbar";
 
 type Props = {
   isLoggedIn: boolean;
@@ -24,17 +22,8 @@ const NAV_ITEMS = [
 ];
 
 const NavbarClient = ({ isLoggedIn, userRole }: Props) => {
-  const totalItems = useCartStore((state) => state.totalItems);
-  const fetchCart = useCartStore((state) => state.fetchCart);
-  useEffect(() => {
-    if (isLoggedIn) {
-      fetchCart();
-    }
-  }, [isLoggedIn, fetchCart]);
-  const pathname = usePathname();
-  const [openSearch, setOpenSearch] = useState(false);
-
-  const userHref = userRole === "admin" ? "/admin" : "/users";
+  const { totalItems, pathname, openSearch, setOpenSearch, userHref } =
+    useNavbar(isLoggedIn, userRole);
 
   return (
     <>
