@@ -41,13 +41,13 @@ const collections = [
     title: "Core Essentials",
     desc: "Timeless staples for everyday wear.",
     items: "24 Items",
-    image: "/hoddieCollection/hoddie4.png",
+    image: "/collections/collection.png",
   },
   {
     title: "Urban Minimal",
     desc: "Clean lines. Minimal impact.",
     items: "18 Items",
-    image: "/T-shirt/tshirt1.png",
+    image: "/collections/collection2.png",
   },
   {
     title: "Outerwear",
@@ -59,19 +59,19 @@ const collections = [
     title: "Comfort Club",
     desc: "Built for movement. Made for comfort.",
     items: "12 Items",
-    image: "/hoddieCollection/product2.png",
+    image: "/collections/collection3.png",
   },
   {
     title: "Accessories",
     desc: "The details that complete the look.",
     items: "20 Items",
-    image: "/hoddieCollection/product3.png",
+    image: "/collections/collection5.png",
   },
   {
     title: "Limited Editions",
     desc: "Exclusive drops. Limited stock.",
     items: "10 Items",
-    image: "/hoddieCollection/hoddie5.png",
+    image: "/collections/collection4.png",
   },
 ];
 
@@ -98,21 +98,21 @@ const CollectionsPage = () => {
       {/* Hero */}
       <div className="grid grid-cols-12 items-center bg-linear-to-r from-white via-neutral-50 to-white px-16">
         <div className="col-span-6 py-6">
-          <div className="flex items-center gap-2 text-sm font-roboto text-gray-400 uppercase tracking-[0.08em]">
-            <Link href="/home" className="hover:text-black transition">
-              Home
-            </Link>
-            <span>/</span>
-            <span className="text-black font-medium">Collections</span>
+          <div className="flex flex-col justify-center">
+            <div className="flex items-center gap-2 text-sm font-roboto text-gray-400 uppercase tracking-[0.08em]">
+              <Link href="/home" className="hover:text-black transition">
+                Home
+              </Link>
+              <span>/</span>
+              <span className="text-black font-medium">SHOP</span>
+            </div>
+            <h1 className="text-6xl font-barlow font-extrabold text-black uppercase tracking-[0.08rem]">
+              Collections
+            </h1>
+            <p className="max-w-md font-roboto text-base font-light leading-7 text-gray-400">
+              Curated collections, designed with purpose
+            </p>
           </div>
-
-          <h1 className="mt-5 font-barlow text-7xl font-extrabold uppercase tracking-[0.04em] text-black">
-            Collections
-          </h1>
-
-          <p className="mt-5 max-w-md font-roboto text-base font-light leading-7 text-gray-400">
-            Curated collections, designed with purpose
-          </p>
         </div>
       </div>
 
@@ -257,7 +257,7 @@ const CollectionsPage = () => {
                 key={item.title}
                 className="group overflow-hidden rounded-md border border-gray-200 bg-white"
               >
-                <div className="relative h-56 overflow-hidden bg-neutral-100">
+                <div className="relative h-[450px] sm:h-[600px] lg:h-[750px] overflow-hidden bg-neutral-100">
                   <Image
                     src={item.image}
                     alt={item.title}
