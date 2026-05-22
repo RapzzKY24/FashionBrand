@@ -1,6 +1,7 @@
+import { API_BASE_URL } from "./config";
 import { ApiError } from "./errors";
 
-const BASE_URL = "http://localhost:8080/api/v1";
+const BASE_URL = API_BASE_URL;
 
 export interface ApiOptions {
   method?: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";

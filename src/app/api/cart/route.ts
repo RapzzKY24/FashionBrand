@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "@/src/shared/api/config";
 import { cookies } from "next/headers";
 
 export async function GET() {
@@ -18,7 +19,7 @@ export async function GET() {
     );
   }
 
-  const res = await fetch("http://localhost:8080/api/v1/cart", {
+  const res = await fetch(`${API_BASE_URL}/cart`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -30,7 +31,7 @@ export async function GET() {
 export async function POST(req: Request) {
   const token = (await cookies()).get("token")?.value;
   const body = await req.json();
-  const res = await fetch("http://localhost:8080/api/v1/cart", {
+  const res = await fetch(`${API_BASE_URL}/cart`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -45,7 +46,7 @@ export async function POST(req: Request) {
 export async function UPDATE(req: Request) {
   const token = (await cookies()).get("token")?.value;
   const body = await req.json();
-  const res = await fetch(`http://localhost:8080/api/v1/cart/${body.id}`, {
+  const res = await fetch(`${API_BASE_URL}/cart/${body.id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -59,7 +60,7 @@ export async function UPDATE(req: Request) {
 
 export async function DELETE() {
   const token = (await cookies()).get("token")?.value;
-  const res = await fetch(`http://localhost:8080/api/v1/cart/`, {
+  const res = await fetch(`${API_BASE_URL}/cart`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",

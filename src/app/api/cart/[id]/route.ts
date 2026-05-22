@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "@/src/shared/api/config";
 import { cookies } from "next/headers";
 
 type Params = {
@@ -10,7 +11,7 @@ export async function PUT(req: Request, { params }: Params) {
   const { id } = await params;
   const token = (await cookies()).get("token")?.value;
   const body = await req.json();
-  const res = await fetch(`http://localhost:8080/api/v1/cart/${id}`, {
+  const res = await fetch(`${API_BASE_URL}/cart/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -25,7 +26,7 @@ export async function PUT(req: Request, { params }: Params) {
 export async function DELETE(_req: Request, { params }: Params) {
   const { id } = await params;
   const token = (await cookies()).get("token")?.value;
-  const res = await fetch(`http://localhost:8080/api/v1/cart/${id}`, {
+  const res = await fetch(`${API_BASE_URL}/cart/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
