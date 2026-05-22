@@ -1,11 +1,22 @@
+"use client";
+
 import { ArrowRightIcon, EyeIcon } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import { useActionState, useEffect } from "react";
 import { loginAction } from "../actions/authAction";
+import { toast } from "sonner";
 
 export const LoginForm = () => {
+  const [state, formAction] = useActionState(loginAction, undefined);
+
+  useEffect(() => {
+    if (state?.error) {
+      toast.error(state.error);
+    }
+  }, [state]);
+
   return (
-    <form className="mt-10 space-y-6" action={loginAction}>
+    <form className="mt-10 space-y-6" action={formAction}>
       <div>
         <label className="font-roboto text-sm">Email Address</label>
         <input

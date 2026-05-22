@@ -1,9 +1,21 @@
+"use client";
+
 import { ArrowRightIcon, EyeIcon } from "lucide-react";
+import { useActionState, useEffect } from "react";
 import { registerAction } from "../actions/authAction";
+import { toast } from "sonner";
 
 export const RegisterForm = () => {
+  const [state, formAction] = useActionState(registerAction, undefined);
+
+  useEffect(() => {
+    if (state?.error) {
+      toast.error(state.error);
+    }
+  }, [state]);
+
   return (
-    <form className="mt-10 space-y-5" action={registerAction}>
+    <form className="mt-10 space-y-5" action={formAction}>
       <div>
         <label className="font-roboto text-sm">Full Name</label>
 
@@ -34,7 +46,7 @@ export const RegisterForm = () => {
             name="password"
             type="password"
             placeholder="Create password"
-            className="h-14 w-full rounded-md border border-gray-300 px-4 pr-12 font-roboto text-sm outline-none transition focus:border-black"
+            className="mt-3 h-14 w-full rounded-md border border-gray-300 px-4 pr-12 font-roboto text-sm outline-none transition focus:border-black"
           />
 
           <EyeIcon

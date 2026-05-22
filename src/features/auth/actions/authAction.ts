@@ -4,53 +4,62 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { AuthService } from "../services/auth";
 
-export async function loginAction(formData: FormData) {
+export async function loginAction(_prevState: unknown, formData: FormData) {
   const email = String(formData.get("email") || "");
   const password = String(formData.get("password") || "");
 
-  const response = await AuthService.login({
-    email,
-    password,
-  });
+  try {
+    const response = await AuthService.login({
+      email,
+      password,
+    });
 
-  const { token, user } = response.data;
+    const { token, user } = response.data;
 
-  const cookieStore = await cookies();
+    const cookieStore = await cookies();
 
-  cookieStore.set("token", token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-    path: "/",
-    maxAge: 60 * 60 * 24 * 7,
-  });
+    cookieStore.set("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+      maxAge: 60 * 60 * 24 * 7,
+    });
 
-  cookieStore.set("user_role", user.role, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-    path: "/",
-    maxAge: 60 * 60 * 24 * 7,
-  });
+    cookieStore.set("user_role", user.role, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+      maxAge: 60 * 60 * 24 * 7,
+    });
+  } catch {
+    return { error: "Invalid email or password." };
+  }
 
-  redirect(user.role === "admin" ? "/admin" : "/");
+  redirect("/");
 }
 
-export async function registerAction(formData: FormData) {
+export async function registerAction(_prevState: unknown, formData: FormData) {
   const name = String(formData.get("name") || "");
   const email = String(formData.get("email") || "");
   const password = String(formData.get("password") || "");
 
-  const response = await AuthService.register({
-    name,
-    email,
-    password,
-  });
+  try {
+    const response = await AuthService.register({
+      name,
+      email,
+      password,
+    });
 
-  if (response.status === "success") {
-    redirect("/auth/login");
+    if (response.status === "success") {
+      redirect("/auth/login");
+    }
+
+    return { error: response.message || "Register failed" };
+  } catch {
+    return { error: "Something went wrong. Please try again." };
   }
-  throw new Error(response.message || "Register failed");
 }
 
 export async function logoutAction(): Promise<void> {
