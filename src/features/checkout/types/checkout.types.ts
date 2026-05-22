@@ -1,3 +1,5 @@
+import type { CartItem } from "../../product/store/store";
+
 export type OrderStatus = "pending" | "paid" | "completed" | "cancelled";
 
 export type PaymentStatus = "pending" | "paid" | "failed";
@@ -22,21 +24,6 @@ export type Address = {
   full_address: string;
   label: string;
   is_primary: boolean;
-};
-
-export type CartItem = {
-  id: string;
-  product_id: string;
-  name: string;
-  slug: string;
-  image: string;
-  price: number;
-  quantity: number;
-  subtotal: number;
-  stock: number;
-  stock_status: string;
-  created_at: string;
-  updated_at: string;
 };
 
 export type Cart = {

@@ -2,7 +2,6 @@ import {
   HeadphonesIcon,
   RefreshCcwIcon,
   ShieldCheckIcon,
-  TruckIcon,
 } from "lucide-react";
 import { InfoItem } from "./infoItem";
 import { formatRupiah } from "@/src/utils/formatCurrency";
@@ -57,17 +56,6 @@ export const OrderSummary = ({
           <p className="font-roboto font-bold text-xl">{formatRupiah(total)}</p>
         </div>
 
-        <div className="bg-neutral-100 rounded-md p-4 flex items-center gap-4 mb-6">
-          <TruckIcon size={22} />
-          <div>
-            <p className="font-roboto text-xs font-medium text-black">
-              Free shipping on orders over $200
-            </p>
-            <p className="font-roboto text-xs text-gray-500">
-              You&apos;re $-15 away from free shipping!
-            </p>
-          </div>
-        </div>
         <Link href={isCartEmpty ? "/" : "/checkout"} className="block">
           <button
             disabled={isCartEmpty}

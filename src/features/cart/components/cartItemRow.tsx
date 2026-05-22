@@ -35,10 +35,7 @@ export const CartItemRow = ({ item }: CartItemRowProps) => {
             {item.name}
           </h3>
 
-          <div className="space-y-1">
-            <p className="font-roboto text-sm text-black">Size: S</p>
-            <p className="font-roboto text-sm text-black">Color: Green</p>
-          </div>
+
 
           <button className="flex items-center gap-2 text-gray-500 hover:text-black transition w-fit">
             <HeartIcon size={16} />
