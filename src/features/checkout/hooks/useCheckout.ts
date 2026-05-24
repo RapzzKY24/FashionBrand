@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import { Address, Cart } from "../types/checkout.types";
 import { CheckoutService } from "../services/checkout";
 
@@ -35,18 +36,20 @@ export const useCheckout = ({ addresses, cart }: UseCheckoutProps) => {
 
   const handleCheckout = async () => {
     if (!selectedAddressId) {
-      alert("Please select a shipping address");
+      toast.error("Please select a shipping address");
       return;
     }
 
     if (cart.items.length === 0) {
-      alert("Your cart is empty");
+      toast.error("Your cart is empty");
       return;
     }
 
     const data = await CheckoutService.createCheckout(selectedAddressId);
 
-    router.push(`/users/orders/${data?.id}`);
+    if (!data) return;
+
+    router.push(`/users/orders/${data.id}`);
   };
 
   return {

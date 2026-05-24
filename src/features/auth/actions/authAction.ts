@@ -52,14 +52,14 @@ export async function registerAction(_prevState: unknown, formData: FormData) {
       password,
     });
 
-    if (response.status === "success") {
-      redirect("/auth/login");
+    if (response.status !== "success") {
+      return { error: response.message || "Register failed" };
     }
-
-    return { error: response.message || "Register failed" };
   } catch {
     return { error: "Something went wrong. Please try again." };
   }
+
+  redirect("/auth/login");
 }
 
 export async function logoutAction(): Promise<void> {
