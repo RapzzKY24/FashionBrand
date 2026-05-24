@@ -4,7 +4,6 @@ import {
   HeartIcon,
   HomeIcon,
   LogOutIcon,
-  MapPinIcon,
   PackageIcon,
   SearchCheckIcon,
   UserIcon,
