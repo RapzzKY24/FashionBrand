@@ -1,11 +1,12 @@
 "use client";
 
-import { ArrowRightIcon, EyeIcon } from "lucide-react";
-import { useActionState, useEffect } from "react";
+import { ArrowRightIcon, EyeIcon, EyeOffIcon } from "lucide-react";
+import { useActionState, useEffect, useState } from "react";
 import { registerAction } from "../actions/authAction";
 import { toast } from "sonner";
 
 export const RegisterForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const [state, formAction] = useActionState(registerAction, undefined);
 
   useEffect(() => {
@@ -46,16 +47,19 @@ export const RegisterForm = () => {
         <div className="relative mt-3">
           <input
             name="password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             placeholder="Create password"
             required
             className="mt-3 h-14 w-full rounded-md border border-gray-300 px-4 pr-12 font-roboto text-sm outline-none transition focus:border-black"
           />
 
-          <EyeIcon
-            size={18}
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
             className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500"
-          />
+          >
+            {showPassword ? <EyeOffIcon size={18} /> : <EyeIcon size={18} />}
+          </button>
         </div>
       </div>
 

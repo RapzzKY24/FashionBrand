@@ -82,7 +82,7 @@ export default async function OrderDetailPage({ params }: Props) {
 
   const activeIndex = statusStepMap[order.order_status] ?? 0;
   const dates = steps.map((_, i) => {
-    const tracking = order.tracking?.[steps.length - 1 - i];
+    const tracking = order.tracking?.[i];
     if (tracking) {
       const d = new Date(tracking.created_at);
       return d.toLocaleDateString("en-US", {

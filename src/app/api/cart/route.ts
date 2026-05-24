@@ -24,12 +24,38 @@ export async function GET() {
       Authorization: `Bearer ${token}`,
     },
   });
-  const data = await res.json();
+
+  let data;
+  try {
+    data = await res.json();
+  } catch {
+    return Response.json(
+      { status: "error", message: "Invalid response from backend" },
+      { status: 502 },
+    );
+  }
+
   return Response.json(data, { status: res.status });
 }
 
 export async function POST(req: Request) {
   const token = (await cookies()).get("token")?.value;
+
+  if (!token) {
+    return Response.json(
+      {
+        status: "error",
+        message: "Unauthorized",
+        data: {
+          items: [],
+          total_items: 0,
+          total_price: 0,
+        },
+      },
+      { status: 401 },
+    );
+  }
+
   const body = await req.json();
   const res = await fetch(`${API_BASE_URL}/cart`, {
     method: "POST",
@@ -39,22 +65,17 @@ export async function POST(req: Request) {
     },
     body: JSON.stringify(body),
   });
-  const data = await res.json();
-  return Response.json(data, { status: res.status });
-}
 
-export async function UPDATE(req: Request) {
-  const token = (await cookies()).get("token")?.value;
-  const body = await req.json();
-  const res = await fetch(`${API_BASE_URL}/cart/${body.id}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify(body),
-  });
-  const data = await res.json();
+  let data;
+  try {
+    data = await res.json();
+  } catch {
+    return Response.json(
+      { status: "error", message: "Invalid response from backend" },
+      { status: 502 },
+    );
+  }
+
   return Response.json(data, { status: res.status });
 }
 
@@ -67,6 +88,16 @@ export async function DELETE() {
       Authorization: `Bearer ${token}`,
     },
   });
-  const data = await res.json();
+
+  let data;
+  try {
+    data = await res.json();
+  } catch {
+    return Response.json(
+      { status: "error", message: "Invalid response from backend" },
+      { status: 502 },
+    );
+  }
+
   return Response.json(data, { status: res.status });
 }

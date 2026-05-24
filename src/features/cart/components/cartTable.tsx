@@ -1,7 +1,6 @@
 "use client";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeftIcon, Trash2Icon } from "lucide-react";
-import AnimatedButton from "@/src/components/AnimatedButton";
 import { CartItemRow } from "./cartItemRow";
 import { CartItem, useCartStore } from "../../product/store/store";
 import { staggerContainer, staggerItem } from "@/src/animations/variants";

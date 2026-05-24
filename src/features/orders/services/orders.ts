@@ -6,7 +6,7 @@ export const OrderService = {
     const json = await apiFetch<{ data: Order[] }>("/orders", {
       cache: "no-store",
     });
-    return json.data ?? [];
+    return Array.isArray(json.data) ? json.data : [];
   },
 
   getOrderById: async (id: string): Promise<Order | null> => {

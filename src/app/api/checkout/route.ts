@@ -14,7 +14,15 @@ export async function POST(req: Request) {
     body: JSON.stringify(body),
   });
 
-  const data = await res.json();
+  let data;
+  try {
+    data = await res.json();
+  } catch {
+    return Response.json(
+      { status: "error", message: "Invalid response from backend" },
+      { status: 502 },
+    );
+  }
 
   return Response.json(data, {
     status: res.status,

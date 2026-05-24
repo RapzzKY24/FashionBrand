@@ -32,23 +32,31 @@ export const useCartStore = create<CartState>((set) => ({
   totalPrice: 0,
 
   fetchCart: async () => {
-    const res = await fetch("/api/cart");
-    const json = await res.json();
+    try {
+      const res = await fetch("/api/cart");
+      const json = await res.json();
 
-    if (!res.ok) {
+      if (!res.ok) {
+        set({
+          items: [],
+          totalItems: 0,
+          totalPrice: 0,
+        });
+        return;
+      }
+
+      set({
+        items: json.data.items,
+        totalItems: json.data.total_items,
+        totalPrice: json.data.total_price,
+      });
+    } catch {
       set({
         items: [],
         totalItems: 0,
         totalPrice: 0,
       });
-      return;
     }
-
-    set({
-      items: json.data.items,
-      totalItems: json.data.total_items,
-      totalPrice: json.data.total_price,
-    });
   },
 
   addToCart: async (productId, quantity) => {
@@ -100,7 +108,9 @@ export const useCartStore = create<CartState>((set) => ({
       throw new Error("Failed remove item");
     }
 
-    await useCartStore.getState().fetchCart();
+    try {
+      await useCartStore.getState().fetchCart();
+    } catch {}
   },
 
   clearCart: async () => {
@@ -111,6 +121,8 @@ export const useCartStore = create<CartState>((set) => ({
       throw new Error("Failed clear cart");
     }
 
-    await useCartStore.getState().fetchCart();
+    try {
+      await useCartStore.getState().fetchCart();
+    } catch {}
   },
 }));
