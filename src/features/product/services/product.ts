@@ -28,7 +28,13 @@ export type ProductDetailResponse = {
 
 export const ProductService = {
   getAllProduct: async () => {
-    return await apiFetch<ProductResponse>("/products");
+    const res = await apiFetch<Record<string, unknown>>("/products");
+    const data = res.data;
+    if (Array.isArray(data)) {
+      return { data } as ProductResponse;
+    }
+    const paginated = data as Record<string, unknown>;
+    return { data: (paginated.items as ProductItem[]) ?? [] } as ProductResponse;
   },
   getBySlug: async (slug: string) => {
     const res = await apiFetch<ProductDetailResponse>(`/products/${slug}`);

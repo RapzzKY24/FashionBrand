@@ -2,10 +2,7 @@ import FilterPanelProduct from "@/src/features/product/components/FilterPanelPro
 import Header from "@/src/features/product/components/Header";
 import { ProductCard } from "@/src/components/ProductCard";
 import { ProductService } from "@/src/features/product/services/product";
-import {
-  ProductGrid,
-  ProductGridItem,
-} from "@/src/animations/ProductGrid";
+import { ProductGrid, ProductGridItem } from "@/src/animations/ProductGrid";
 
 const ProductPages = async () => {
   const products = await ProductService.getAllProduct();
