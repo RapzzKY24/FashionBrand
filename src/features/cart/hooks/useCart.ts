@@ -10,7 +10,7 @@ export const useCart = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetchCart().finally(() => setIsLoading(false));
+    fetchCart().finally(() => setIsLoading(false)).catch(() => {});
   }, [fetchCart]);
 
   const shipping = items.length > 0 ? 15000 : 0;

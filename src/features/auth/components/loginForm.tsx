@@ -23,6 +23,7 @@ export const LoginForm = () => {
           name="email"
           type="email"
           placeholder="you@example.com"
+          required
           className="mt-3 h-14 w-full rounded-md border border-gray-300 px-4 font-roboto text-sm outline-none"
         />
       </div>
@@ -34,6 +35,7 @@ export const LoginForm = () => {
             name="password"
             type="password"
             placeholder="Enter your password"
+            required
             className="h-14 w-full rounded-md border border-gray-300 px-4 pr-12 font-roboto text-sm outline-none"
           />
           <EyeIcon
@@ -54,7 +56,10 @@ export const LoginForm = () => {
         </Link>
       </div>
 
-      <button className="flex h-14 w-full items-center justify-center gap-3 rounded-md bg-black font-roboto text-sm uppercase tracking-[0.12em] text-white hover:bg-neutral-800">
+      <button
+        type="submit"
+        className="flex h-14 w-full items-center justify-center gap-3 rounded-md bg-black font-roboto text-sm uppercase tracking-[0.12em] text-white hover:bg-neutral-800"
+      >
         Login
         <ArrowRightIcon size={16} />
       </button>
