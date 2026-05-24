@@ -2,21 +2,21 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const PAGE_ORDER = ["/auth/login", "/auth/register"];
 
 export const PageTransition = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
   const prevPath = useRef(pathname);
+  const [direction, setDirection] = useState(1);
 
-  const prevIndex = PAGE_ORDER.indexOf(prevPath.current);
-  const currIndex = PAGE_ORDER.indexOf(pathname);
-  const isForward = currIndex > prevIndex;
-
-  prevPath.current = pathname;
-
-  const direction = isForward ? 1 : -1;
+  useEffect(() => {
+    const prevIndex = PAGE_ORDER.indexOf(prevPath.current);
+    const currIndex = PAGE_ORDER.indexOf(pathname);
+    setDirection(currIndex > prevIndex ? 1 : -1);
+    prevPath.current = pathname;
+  }, [pathname]);
 
   return (
     <AnimatePresence mode="wait">
