@@ -23,8 +23,6 @@ const SearchProductPage = async ({
     page: page ? Number(page) : undefined,
   });
 
-  console.log({ products });
-
   return (
     <div className="px-16 py-6 overflow-hidden w-full pt-26 flex flex-col gap-y-4 justify-center pb-40">
       <Header query={q} totalItems={products.total_items} />
@@ -32,7 +30,7 @@ const SearchProductPage = async ({
         <div className="col-span-1 h-fit">
           <FilterPanelProduct />
         </div>
-        <ProductGrid className="col-span-3 grid grid-cols-3 gap-4">
+        <ProductGrid key={products.data.map(p => p.id).join(',')} className="col-span-3 grid grid-cols-3 gap-4">
           {products?.data.length === 0 ? (
             <div className="col-span-3 flex flex-col items-center justify-center py-20 text-gray-400">
               <p className="font-roboto text-lg">No products found</p>
