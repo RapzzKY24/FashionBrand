@@ -1,5 +1,5 @@
 import { AccountService } from "@/src/features/account-details/services/account";
-import UserSidebar from "@/src/components/Siderbar";
+import UserSidebar from "@/src/components/UserSiderbar";
 
 const UserLayout = async ({ children }: { children: React.ReactNode }) => {
   const profile = await AccountService.getProfile();

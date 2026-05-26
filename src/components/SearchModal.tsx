@@ -3,6 +3,8 @@
 import { SearchIcon, XIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const popularSearches = ["Hoodie", "T-Shirt", "Jacket", "Collections"];
 
@@ -34,7 +36,23 @@ const SearchModal = ({
   open: boolean;
   onClose: () => void;
 }) => {
+  const router = useRouter();
+  const [query, setQuery] = useState("");
+
   if (!open) return null;
+
+  const handleSearch = (term: string) => {
+    const q = term.trim();
+    if (!q) return;
+    onClose();
+    router.push(`/search?q=${encodeURIComponent(q)}`);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      handleSearch(query);
+    }
+  };
 
   return (
     <div className="fixed inset-0 z-100 flex items-start justify-center bg-black/40 px-6 pt-32 backdrop-blur-sm">
@@ -53,14 +71,19 @@ const SearchModal = ({
           <input
             autoFocus
             type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={handleKeyDown}
             placeholder="Search products, collections..."
             className="h-14 w-full rounded-md border border-gray-300 px-5 pr-14 font-roboto text-sm outline-none"
           />
 
-          <SearchIcon
-            size={20}
-            className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-500"
-          />
+          <button
+            onClick={() => handleSearch(query)}
+            className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-500 hover:text-black transition"
+          >
+            <SearchIcon size={20} />
+          </button>
         </div>
 
         <div className="mt-8">
@@ -72,6 +95,7 @@ const SearchModal = ({
             {popularSearches.map((item) => (
               <button
                 key={item}
+                onClick={() => handleSearch(item)}
                 className="rounded-full border border-gray-300 px-5 py-2 font-roboto text-sm hover:border-black hover:bg-black hover:text-white transition"
               >
                 {item}

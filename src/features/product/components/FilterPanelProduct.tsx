@@ -2,13 +2,14 @@
 import { MinusIcon, SlidersHorizontalIcon, XIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import { staggerContainer, staggerItem } from "@/src/animations/variants";
+import { useQueryState } from "nuqs";
 
 const categories = [
-  { name: "All", count: 24, active: true },
-  { name: "Hoodie", count: 10 },
-  { name: "T-Shirt", count: 20 },
-  { name: "Outerwear", count: 50 },
-  { name: "Shoes", count: 15 },
+  { name: "All", slug: null },
+  { name: "Hoodie", slug: "hoodie" },
+  { name: "T-Shirt", slug: "t-shirt" },
+  { name: "Outerwear", slug: "outerwear" },
+  { name: "Shoes", slug: "shoes" },
 ];
 
 const sizes = ["S", "M", "L", "XL", "XXL"];
@@ -22,12 +23,27 @@ export const colors = [
 ];
 
 const collections = [
-  { name: "New Arrival", count: 24, active: true },
-  { name: "Essential", count: 10 },
-  { name: "Limited Edition", count: 20 },
+  { name: "New Arrival", slug: "new-arrival" },
+  { name: "Essential", slug: "essential" },
+  { name: "Limited Edition", slug: "limited-edition" },
 ];
 
+// const sortOptions = [
+//   { name: "Newest", value: "newest" },
+//   { name: "Oldest", value: "oldest" },
+//   { name: "Price: Low to High", value: "price_asc" },
+//   { name: "Price: High to Low", value: "price_desc" },
+// ];
+
 const FilterPanelProduct = () => {
+  const [category, setCategory] = useQueryState("category");
+  // const [sort, setSort] = useQueryState("sort", { defaultValue: "newest" });
+
+  const resetFilters = () => {
+    setCategory(null);
+    // setSort(null);
+  };
+
   return (
     <motion.aside
       className="w-full space-y-4"
@@ -48,29 +64,30 @@ const FilterPanelProduct = () => {
       <motion.div variants={staggerItem}>
         <FilterSection title="Category">
           <div className="space-y-3">
-            {categories.map((item) => (
-              <button
-                key={item.name}
-                className="w-full flex items-center justify-between group"
-              >
-                <span
-                  className={`text-sm font-roboto transition ${
-                    item.active
-                      ? "font-bold text-black"
-                      : "font-light text-black/80 group-hover:text-black"
-                  }`}
+            {categories.map((item) => {
+              const isActive =
+                item.slug === category || (!item.slug && !category);
+              return (
+                <button
+                  key={item.name}
+                  onClick={() => setCategory(item.slug)}
+                  className="w-full flex items-center justify-between group"
                 >
-                  {item.name}
-                </span>
-                <span className="text-sm font-light font-roboto text-gray-400">
-                  ({item.count})
-                </span>
-              </button>
-            ))}
+                  <span
+                    className={`text-sm font-roboto transition ${
+                      isActive
+                        ? "font-bold text-black"
+                        : "font-light text-black/80 group-hover:text-black"
+                    }`}
+                  >
+                    {item.name}
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </FilterSection>
       </motion.div>
-
       <motion.div variants={staggerItem}>
         <FilterSection title="Size">
           <div className="flex items-center gap-3 flex-wrap">
@@ -128,17 +145,8 @@ const FilterPanelProduct = () => {
                 key={item.name}
                 className="w-full flex items-center justify-between group"
               >
-                <span
-                  className={`text-sm font-roboto transition ${
-                    item.active
-                      ? "font-bold text-black"
-                      : "font-light text-black/80 group-hover:text-black"
-                  }`}
-                >
+                <span className="text-sm font-light font-roboto text-black/80 group-hover:text-black transition">
                   {item.name}
-                </span>
-                <span className="text-sm font-light font-roboto text-gray-400">
-                  ({item.count})
                 </span>
               </button>
             ))}
@@ -148,8 +156,11 @@ const FilterPanelProduct = () => {
 
       <motion.div variants={staggerItem}>
         <div className="flex justify-between items-center">
-          <button className="font-light font-roboto text-gray-400 uppercase hover:text-black transition">
-            Reset All
+          <button
+            onClick={resetFilters}
+            className="font-light font-roboto text-gray-400 uppercase hover:text-black transition"
+          >
+            Reset Filters
           </button>
           <XIcon
             size={18}

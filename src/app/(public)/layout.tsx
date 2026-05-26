@@ -1,5 +1,6 @@
 import Footer from "@/src/components/Footer";
 import Navbar from "@/src/components/Navbar";
+import { NuqsAdapter } from "nuqs/adapters/react";
 
 export default function PublicLayout({
   children,
@@ -8,9 +9,11 @@ export default function PublicLayout({
 }) {
   return (
     <>
-      <Navbar />
-      {children}
-      <Footer />
+      <NuqsAdapter>
+        <Navbar />
+        {children}
+        <Footer />
+      </NuqsAdapter>
     </>
   );
 }

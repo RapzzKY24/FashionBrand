@@ -10,7 +10,7 @@ import { slideInRight } from "@/src/animations/variants";
 const HeroSection = () => {
   const ITEMS = Array(10).fill(null);
   return (
-    <section className="space-y-12 w-full pt-20">
+    <section className="space-y-30 w-full pt-34">
       <div className="px-16 py-6 overflow-hidden w-full">
         <div className="grid grid-cols-1 md:grid-cols-2">
           <div className="grid col-span-1">
