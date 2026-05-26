@@ -2,7 +2,7 @@
 import { MinusIcon, SlidersHorizontalIcon, XIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import { staggerContainer, staggerItem } from "@/src/animations/variants";
-import { useQueryState } from "nuqs";
+import { useSearch } from "@/src/features/search/hooks/use-search";
 
 const categories = [
   { name: "All", slug: null },
@@ -36,13 +36,7 @@ const collections = [
 // ];
 
 const FilterPanelProduct = () => {
-  const [category, setCategory] = useQueryState("category");
-  // const [sort, setSort] = useQueryState("sort", { defaultValue: "newest" });
-
-  const resetFilters = () => {
-    setCategory(null);
-    // setSort(null);
-  };
+  const { category, setCategory, resetFilters } = useSearch();
 
   return (
     <motion.aside

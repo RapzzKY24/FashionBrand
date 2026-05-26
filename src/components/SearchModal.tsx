@@ -3,8 +3,8 @@
 import { SearchIcon, XIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect } from "react";
+import { useSearch } from "../features/search/hooks/use-search";
 
 const popularSearches = ["Hoodie", "T-Shirt", "Jacket", "Collections"];
 
@@ -36,21 +36,22 @@ const SearchModal = ({
   open: boolean;
   onClose: () => void;
 }) => {
-  const router = useRouter();
-  const [query, setQuery] = useState("");
+  const { query, setQuery, handleSearch } = useSearch();
+
+  useEffect(() => {
+    if (open) setQuery("");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
 
   if (!open) return null;
 
-  const handleSearch = (term: string) => {
-    const q = term.trim();
-    if (!q) return;
-    onClose();
-    router.push(`/search?q=${encodeURIComponent(q)}`);
+  const handleSearchAction = (term: string) => {
+    if (handleSearch(term)) onClose();
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
-      handleSearch(query);
+      handleSearchAction(query);
     }
   };
 
@@ -79,7 +80,7 @@ const SearchModal = ({
           />
 
           <button
-            onClick={() => handleSearch(query)}
+            onClick={() => handleSearchAction(query)}
             className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-500 hover:text-black transition"
           >
             <SearchIcon size={20} />
@@ -95,7 +96,7 @@ const SearchModal = ({
             {popularSearches.map((item) => (
               <button
                 key={item}
-                onClick={() => handleSearch(item)}
+                onClick={() => handleSearchAction(item)}
                 className="rounded-full border border-gray-300 px-5 py-2 font-roboto text-sm hover:border-black hover:bg-black hover:text-white transition"
               >
                 {item}

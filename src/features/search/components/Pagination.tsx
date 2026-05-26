@@ -1,7 +1,7 @@
 "use client";
 
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
-import { useQueryState } from "nuqs";
+import { useSearch } from "@/src/features/search/hooks/use-search";
 
 const Pagination = ({
   currentPage,
@@ -10,7 +10,7 @@ const Pagination = ({
   currentPage: number;
   totalPages: number;
 }) => {
-  const [, setPage] = useQueryState("page", { defaultValue: "1" });
+  const { setPage } = useSearch();
 
   if (totalPages <= 1) return null;
 
